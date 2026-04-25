@@ -1,0 +1,18 @@
+<svg width="100%" viewBox="0 0 680 260" role="img" xmlns="http://www.w3.org/2000/svg" style=""><defs><mask id="imagine-text-gaps-30h03f" maskUnits="userSpaceOnUse"><rect x="0" y="0" width="680" height="260" fill="white"/><rect x="182.5078125" y="42" width="314.984375" height="162" fill="black" rx="2"/><rect x="205.375" y="196" width="269.25" height="17" fill="black" rx="2"/></mask></defs>
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">MARK logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">Bold geometric logo for Mohammed Abdur Rahman Khan (MARK)</desc>
+
+  <rect x="200" y="30" width="280" height="200" rx="4" fill="#0a0a0f" style="fill:rgb(10, 10, 15);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Accent bar top -->
+  <rect x="200" y="30" width="280" height="4" fill="#e8ff47" style="fill:rgb(232, 255, 71);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- M letterform using paths -->
+  <text x="340" y="175" font-family="'Bebas Neue', 'Impact', sans-serif" font-size="130" fill="#e8ff47" text-anchor="middle" letter-spacing="2" style="fill:rgb(232, 255, 71);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Bebas Neue&quot;, Impact, sans-serif;font-size:130px;font-weight:400;text-anchor:middle;dominant-baseline:auto">MARK</text>
+
+  <!-- Subtle grid lines inside -->
+  <line x1="200" y1="185" x2="480" y2="185" stroke="#1e1e2e" stroke-width="1" mask="url(#imagine-text-gaps-30h03f)" style="fill:rgb(0, 0, 0);stroke:rgb(30, 30, 46);color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+  <!-- Bottom tagline -->
+  <text x="340" y="208" font-family="'JetBrains Mono', monospace" font-size="11" fill="#6b6b80" text-anchor="middle" letter-spacing="4" style="fill:rgb(107, 107, 128);stroke:none;color:rgb(255, 255, 255);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;JetBrains Mono&quot;, monospace;font-size:11px;font-weight:400;text-anchor:middle;dominant-baseline:auto">MOHAMMED ABDUR RAHMAN KHAN</text>
+</svg>
