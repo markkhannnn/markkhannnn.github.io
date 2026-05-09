@@ -93,6 +93,16 @@ body.cursor-hover #cur-ring { width: 52px; height: 52px; border-color: rgba(71,2
   100% { opacity: 0; transform: translateY(-130px) scale(.4); }
 }
 
+/* BINARY RAIN CANVAS */
+#binary-rain {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.32;
+}
+
 /* ═══ NAV ═══ */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 500;
@@ -527,6 +537,9 @@ footer a:hover { color: var(--accent2); }
 <div id="progress"></div>
 <div class="grid-bg"></div>
 <div class="particles" id="particles"></div>
+
+<!-- ═══════════ BINARY RAIN ═══════════ -->
+<canvas id="binary-rain"></canvas>
 
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="nav">
@@ -973,6 +986,165 @@ const secObserver = new IntersectionObserver(entries => {
 }, { threshold: 0.45 });
 
 sections.forEach(s => secObserver.observe(s));
+
+/* ════════════════════════════════════════
+   BINARY RAIN
+   Matrix-style columns of 0/1 characters
+   falling from the nav downward.
+   — Yellow head, fading green/cyan trail
+   — Each column has random speed & delay
+   — Occasional column "glitch" flash
+════════════════════════════════════════ */
+(function initBinaryRain() {
+  const canvas = document.getElementById('binary-rain');
+  const ctx    = canvas.getContext('2d');
+
+  const FONT_SIZE   = 13;        // px — monospace cell height
+  const CHARS       = '01';      // only binary
+  const ACCENT_Y    = '#e8ff47'; // yellow head
+  const ACCENT_C    = '#47d4ff'; // occasional cyan head
+  const BASE_COLOR  = '#39ff14'; // neon green trail body (muted via globalAlpha per drop)
+  const FADE_STEPS  = 22;        // how many chars in each trail before fully fading
+
+  let cols, drops, speeds, glitch;
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = document.documentElement.scrollHeight;
+
+    cols   = Math.floor(canvas.width / FONT_SIZE);
+    drops  = new Float32Array(cols);      // y position (in cells) for each column
+    speeds = new Float32Array(cols);      // fall speed multiplier
+    glitch = new Uint8Array(cols);        // glitch intensity 0-255
+
+    for (let i = 0; i < cols; i++) {
+      // start columns at random heights above viewport so they arrive staggered
+      drops[i]  = -(Math.random() * 80);
+      speeds[i] = 0.25 + Math.random() * 0.65;
+      glitch[i] = 0;
+    }
+  }
+
+  // Pre-build per-column trail color arrays for perf
+  function trailAlpha(step) {
+    // step 0 = head (brightest), step FADE_STEPS = invisible
+    return Math.max(0, 1 - step / FADE_STEPS);
+  }
+
+  // Sparse "history" of chars per column so they look consistent
+  const charHistory = [];
+
+  function initHistory() {
+    charHistory.length = 0;
+    const rows = Math.ceil(canvas.height / FONT_SIZE) + FADE_STEPS + 5;
+    for (let c = 0; c < cols; c++) {
+      const col = [];
+      for (let r = 0; r < rows; r++) {
+        col.push(CHARS[Math.floor(Math.random() * CHARS.length)]);
+      }
+      charHistory.push(col);
+    }
+  }
+
+  // Randomly mutate a few chars per frame for the "live" flickering effect
+  function mutateHistory() {
+    const mutations = Math.floor(cols * 0.08); // 8 % of columns get 1 char changed
+    for (let m = 0; m < mutations; m++) {
+      const c = Math.floor(Math.random() * cols);
+      const r = Math.floor(Math.random() * charHistory[c].length);
+      charHistory[c][r] = CHARS[Math.floor(Math.random() * CHARS.length)];
+    }
+  }
+
+  let lastTime = 0;
+  const INTERVAL = 1000 / 24; // ~24 fps — enough for rain, saves CPU
+
+  function draw(now) {
+    requestAnimationFrame(draw);
+    if (now - lastTime < INTERVAL) return;
+    lastTime = now;
+
+    // Clear with full transparent — we draw each char with its own alpha
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = `${FONT_SIZE}px 'JetBrains Mono', monospace`;
+    ctx.textAlign = 'center';
+
+    mutateHistory();
+
+    for (let c = 0; c < cols; c++) {
+      const headRow = Math.floor(drops[c]);
+      const x = c * FONT_SIZE + FONT_SIZE / 2;
+
+      // Draw the trail (from head upward)
+      for (let step = 0; step <= FADE_STEPS; step++) {
+        const row = headRow - step;
+        if (row < 0) continue;
+
+        const y = row * FONT_SIZE;
+        if (y > canvas.height) continue;
+
+        const alpha = trailAlpha(step);
+        if (alpha <= 0) continue;
+
+        const ch = charHistory[c][row % charHistory[c].length];
+
+        if (step === 0) {
+          // HEAD — bright yellow or occasional cyan
+          const isGlitch = glitch[c] > 180;
+          ctx.fillStyle = isGlitch ? ACCENT_C : ACCENT_Y;
+          ctx.globalAlpha = 1;
+          // Glow effect for head
+          ctx.shadowBlur  = 8;
+          ctx.shadowColor = isGlitch ? ACCENT_C : ACCENT_Y;
+        } else if (step === 1) {
+          // Second char — bright white flash
+          ctx.fillStyle   = '#ccffcc';
+          ctx.globalAlpha = alpha * 0.9;
+          ctx.shadowBlur  = 4;
+          ctx.shadowColor = BASE_COLOR;
+        } else {
+          // Trail — green fading out
+          ctx.fillStyle   = BASE_COLOR;
+          ctx.globalAlpha = alpha * 0.75;
+          ctx.shadowBlur  = step < 4 ? 3 : 0;
+          ctx.shadowColor = BASE_COLOR;
+        }
+
+        ctx.fillText(ch, x, y);
+      }
+
+      // Reset shadow
+      ctx.shadowBlur  = 0;
+      ctx.globalAlpha = 1;
+
+      // Advance drop
+      drops[c] += speeds[c];
+
+      // Random glitch pulse
+      if (Math.random() < 0.004) glitch[c] = Math.floor(Math.random() * 256);
+      else glitch[c] = Math.max(0, glitch[c] - 8);
+
+      // Reset column when head goes off-bottom, with random delay
+      const rows = Math.ceil(canvas.height / FONT_SIZE);
+      if (drops[c] - FADE_STEPS > rows) {
+        drops[c]  = -(Math.random() * 40 + FADE_STEPS);
+        speeds[c] = 0.25 + Math.random() * 0.65;
+      }
+    }
+  }
+
+  // Rebuild canvas height when page height changes (sections expanding, etc.)
+  const resizeObserver = new ResizeObserver(() => {
+    resize();
+    initHistory();
+  });
+  resizeObserver.observe(document.body);
+
+  resize();
+  initHistory();
+  requestAnimationFrame(draw);
+})();
 </script>
 
 </body>
