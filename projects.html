@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects — Mohammed Abdur Rahman Khan</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='4' fill='%23e9e4da'/><text y='82' x='50' font-family='Impact,sans-serif' font-size='72' fill='%231f7ae0' text-anchor='middle'>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>html, body { overflow: hidden; height: 100%; }</style>
+</head>
+<body data-page="projects">
+
+<div class="aurora"></div>
+
+<!-- Mobile menu -->
+<div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+  <a href="index.html" data-page="home">Home</a>
+  <a href="about.html" data-page="about">About</a>
+  <a href="projects.html" data-page="projects">Projects</a>
+  <a href="research.html" data-page="research">Research</a>
+  <a href="contact.html" data-page="contact">Contact</a>
+</div>
+
+<!-- ═══ NAV ═══ -->
+<nav id="nav">
+  <ul class="nav-links">
+    <li><a href="index.html" data-page="home">Home</a></li>
+    <li><a href="about.html" data-page="about">About</a></li>
+    <li><a href="projects.html" data-page="projects">Projects</a></li>
+    <li><a href="research.html" data-page="research">Research</a></li>
+    <li><a href="contact.html" data-page="contact">Contact</a></li>
+  </ul>
+  <button class="nav-ham" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="spiral-heading">Projects</div>
+
+<section class="spiral-section" id="projSpiral">
+  <div class="spiral-stage">
+    <div class="helix">
+      <article class="card3d" style="--n:0"
+               data-href="https://github.com/markkhannnn/Air-Pollution-Predictor"
+               tabindex="0" role="link" aria-label="Open Air Pollution Prediction on GitHub">
+        <div class="card-arrow" aria-hidden="true">↗</div>
+        <div class="proj-num">PROJECT 01</div>
+        <h3>Air Pollution Prediction</h3>
+        <div class="proj-tags">
+          <span class="tag">Python</span><span class="tag">Deep Learning</span>
+          <span class="tag">LSTM</span><span class="tag">CNN</span>
+          <span class="tag">Random Forest</span><span class="tag">AQI</span>
+        </div>
+        <div style="margin-top:1.4rem;">
+          <a href="https://github.com/markkhannnn/Air-Pollution-Predictor" target="_blank" class="btn btn-ghost">GitHub &nbsp;→</a>
+        </div>
+      </article>
+
+      <article class="card3d" style="--n:1"
+               data-href="https://github.com/markkhannnn/ChatAnalyzer"
+               tabindex="0" role="link" aria-label="Open Chat Analyzer on GitHub">
+        <div class="card-arrow" aria-hidden="true">↗</div>
+        <div class="proj-num">PROJECT 02</div>
+        <h3>Chat Analyzer</h3>
+        <div class="proj-tags">
+          <span class="tag">Python</span><span class="tag">NLP</span>
+          <span class="tag">Data Viz</span><span class="tag">Pandas</span>
+          <span class="tag">Sentiment Analysis</span>
+        </div>
+        <div style="margin-top:1.4rem;">
+          <a href="https://github.com/markkhannnn/ChatAnalyzer" target="_blank" class="btn btn-ghost">GitHub &nbsp;→</a>
+        </div>
+      </article>
+
+      <article class="card3d" style="--n:2"
+               data-href="research.html"
+               tabindex="0" role="link" aria-label="Read more about the Event-Aware Air Quality Prediction research">
+        <div class="card-arrow" aria-hidden="true">↗</div>
+        <div class="proj-num">RESEARCH</div>
+        <h3>Event-Aware Air Quality Prediction</h3>
+        <div class="proj-tags">
+          <span class="tag">Deep Learning</span><span class="tag">Environmental AI</span>
+        </div>
+        <div style="margin-top:1.4rem;">
+          <a href="research.html" class="btn btn-ghost">Read more &nbsp;→</a>
+        </div>
+      </article>
+    </div>
+
+    <div class="summary-dock" aria-live="polite">
+      <p class="summary" data-for="0">
+        Comparative analysis of ML and deep learning models — RF, LSTM, CNN, and hybrid CNN-LSTM — for AQI forecasting. Incorporates event-aware modeling for festivals, traffic surges, and industrial activity patterns.
+      </p>
+      <p class="summary" data-for="1">
+        A tool to extract meaningful insights from social media conversations — message patterns, sentiment trends, activity heatmaps, and more. Works across popular chat export formats.
+      </p>
+      <p class="summary" data-for="2">
+        Published research benchmarking RF, LSTM, CNN, and hybrid CNN-LSTM models for event-aware AQI prediction.
+      </p>
+    </div>
+  </div>
+
+  <button class="spiral-nav-btn prev" aria-label="Previous project">‹</button>
+  <button class="spiral-nav-btn next" aria-label="Next project">›</button>
+
+  
+</section>
+
+<script src="main.js"></script>
+</body>
+</html>
